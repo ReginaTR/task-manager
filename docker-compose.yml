@@ -1,4 +1,5 @@
-ersion: '1.0.0'
+version: "3.9"
+
 
 volumes:
   web_db:
@@ -48,7 +49,7 @@ services:
     expose:
       - '3308'
     volumes:
-      - notify_db:/var/lib/mysql
+      - noti_db:/var/lib/mysql
 
   scrap_db:
     image: mysql:8.2
@@ -116,7 +117,7 @@ services:
     build: .
     stdin_open: true
     tty: true
-    entrypoint: notify/config/setup_app.sh
+    entrypoint: noti/config/setup_app.sh
     command: bash -c "rails s -p 3002 -b '0.0.0.0'"
     environment:
       TZ: America/Fortaleza
