@@ -1,5 +1,5 @@
 --- !ruby/object:Railsui::Configuration
-application_name: Rails UI
+application_name: Scrap
 support_email: support@example.com
 theme: hound
 colors:
