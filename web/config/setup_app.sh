@@ -19,4 +19,4 @@ else
   echo ' --> Skip migrations for Dev env'
 fi
 
-exec "$@" 
+exec "$@"  # command from docker-compose
