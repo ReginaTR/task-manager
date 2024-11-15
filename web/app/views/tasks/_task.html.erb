@@ -1,22 +1,25 @@
-<div id="<%= dom_id task %>">
-  <p>
-    <strong>Title:</strong>
+<article id="<%= dom_id task %>"class="py-6 prose dark:prose-invert">
+  <p class="mb-0 font-semibold">
+    <strong>Título:</strong>
     <%= task.title %>
   </p>
 
-  <p>
+  <p class="mb-0 font-semibold">
     <strong>Url:</strong>
     <%= task.url %>
   </p>
 
-  <p>
+  <p class="mb-0 font-semibold">
     <strong>Status:</strong>
     <%= task.status %>
   </p>
 
-  <p>
-    <strong>Description:</strong>
+  <p class="mb-0 font-semibold">
+    <strong>Descrição:</strong>
     <%= task.description %>
   </p>
 
-</div>
+  <p>
+    <%= link_to "Visualizar Tarefa", task, class: "underline" %>
+  </p>
+</article>

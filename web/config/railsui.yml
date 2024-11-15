@@ -1,5 +1,5 @@
 --- !ruby/object:Railsui::Configuration
-application_name: web
+application_name: Web
 support_email: support@example.com
 theme: hound
 colors:

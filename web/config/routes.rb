@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :tasks
 
   namespace :rui do
     get "about", to: "pages#about"
@@ -25,6 +24,7 @@ Rails.application.routes.draw do
      # Visit the start page for Rails UI any time at /railsui/start
     mount Railsui::Engine, at: "/railsui"
   end
+  resources :tasks
 
   # Inherits from Railsui::PageController#index
   # To override, add your own page#index view or change to a new root

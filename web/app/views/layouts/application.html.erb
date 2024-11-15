@@ -7,22 +7,24 @@
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
-    <%= yield :head %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <%= stylesheet_link_tag "application", "https://unpkg.com/trix@2.0.0/dist/trix.css", "data-turbo-track": "reload" %>
 
-    <link rel="manifest" href="/manifest.json">
-    <link rel="icon" href="/icon.png" type="image/png">
-    <link rel="icon" href="/icon.svg" type="image/svg+xml">
-    <link rel="apple-touch-icon" href="/icon.png">
-    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
-    <%= javascript_include_tag "application", defer: true %>
-    <%= javascript_include_tag "application", "data-turbo-track": "reload", type: "module" %>
-  
-    <%= railsui_head %>
+    <%= render "rui/shared/fonts" %>
+    <%= render "rui/shared/meta" %>
+    <%= custom_colors_css %>
+    <%= yield :head %>
 </head>
 
-  <body>
+  <body class="font-normal leading-normal text-slate-800 relative selection:bg-primary-500/40 bg-white dark:bg-slate-900 dark:text-slate-100 antialiased">
+    <%= turbo_include_tags %>
+    <%= render "rui/shared/flash" %>
+    <% if content_for(:header).present? %>
+      <%= yield :header %>
+    <% else %>
+      <%= render "rui/shared/nav" %>
+    <% end %>
     <%= yield %>
-  
     <%= railsui_launcher if Rails.env.development? %>
-</body>
+  </body>
 </html>
