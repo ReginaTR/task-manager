@@ -14,7 +14,7 @@ ActiveRecord::Schema[7.2].define(version: 2024_11_14_175808) do
   create_table "tasks", charset: "utf8mb4", collation: "utf8mb4_0900_ai_ci", force: :cascade do |t|
     t.string "title"
     t.string "url"
-    t.integer "status"
+    t.string "status"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false

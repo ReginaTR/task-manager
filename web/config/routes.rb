@@ -25,10 +25,10 @@ Rails.application.routes.draw do
     mount Railsui::Engine, at: "/railsui"
   end
   resources :tasks
-
+  root "tasks#index"
   # Inherits from Railsui::PageController#index
   # To override, add your own page#index view or change to a new root
-  root action: :index, controller: "railsui/default"
+  #root action: :index, controller: "railsui/default"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
