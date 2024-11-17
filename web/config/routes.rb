@@ -28,7 +28,8 @@ Rails.application.routes.draw do
     mount Railsui::Engine, at: "/railsui"
   end
   
-  root "tasks#index"
+  root to: 'sessions#new'
+
   # Inherits from Railsui::PageController#index
   # To override, add your own page#index view or change to a new root
   #root action: :index, controller: "railsui/default"
