@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-
+  resources :tasks
   namespace :rui do
     get "about", to: "pages#about"
     get "pricing", to: "pages#pricing"
@@ -19,15 +19,20 @@ Rails.application.routes.draw do
     get "team", to: "pages#team"
     get "integrations", to: "pages#integrations"
   end
+  get '/sessions', to: 'sessions#new', as: 'login'
+  post '/sessions', to: 'sessions#create'
+  delete '/sessions', to: 'sessions#destroy', as: 'logout'
 
   if Rails.env.development?
      # Visit the start page for Rails UI any time at /railsui/start
     mount Railsui::Engine, at: "/railsui"
   end
+  
+  root to: 'sessions#new'
 
   # Inherits from Railsui::PageController#index
   # To override, add your own page#index view or change to a new root
-  root action: :index, controller: "railsui/default"
+  #root action: :index, controller: "railsui/default"
 
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -39,6 +44,4 @@ Rails.application.routes.draw do
   get "service-worker" => "rails/pwa#service_worker", as: :pwa_service_worker
   get "manifest" => "rails/pwa#manifest", as: :pwa_manifest
 
- 
-  #root "home#index"
 end
