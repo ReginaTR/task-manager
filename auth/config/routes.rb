@@ -20,6 +20,10 @@ Rails.application.routes.draw do
     get "integrations", to: "pages#integrations"
   end
 
+  post '/register', to: 'auth#register'
+  post '/authenticate', to: 'auth#authenticate'
+  get '/validate_token', to: 'auth#validate_token'
+
   if Rails.env.development?
      # Visit the start page for Rails UI any time at /railsui/start
     mount Railsui::Engine, at: "/railsui"

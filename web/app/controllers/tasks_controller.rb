@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :require_login
+  #before_action :require_login
   before_action :set_ransack_params, only: [:index]
   before_action :set_task, only: %i[ show edit update destroy ]
 
@@ -66,9 +66,9 @@ class TasksController < ApplicationController
       params.require(:task).permit(:title, :url, :status, :description)
     end
 
-    def require_login
-      unless session[:user_id]
-        redirect_to login_path, alert: "Por favor, faça login primeiro."
-      end
-    end
+    # def require_login
+      #unless session[:user_id]
+      #redirect_to login_path, alert: "Por favor, faça login primeiro."
+      #end
+    #end
 end

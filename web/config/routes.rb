@@ -22,7 +22,7 @@ Rails.application.routes.draw do
   get '/sessions', to: 'sessions#new', as: 'login'
   post '/sessions', to: 'sessions#create'
   delete '/sessions', to: 'sessions#destroy', as: 'logout'
-
+  
   if Rails.env.development?
      # Visit the start page for Rails UI any time at /railsui/start
     mount Railsui::Engine, at: "/railsui"

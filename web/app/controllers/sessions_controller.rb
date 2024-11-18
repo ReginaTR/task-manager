@@ -12,7 +12,7 @@ class SessionsController < ApplicationController
   
       if response[:status] == 'success'
         session[:auth_token] = response[:token]
-        redirect_to task_path 
+        redirect_to tasks_path
       else
         flash[:alert] = 'Credenciais inválidas.'
         render :new
@@ -28,6 +28,7 @@ class SessionsController < ApplicationController
   
     def authenticate_user(email, password)
       connection = Faraday.new(url: 'http://auth:3001/authenticate') do |faraday|
+        faraday.ssl[:verify] = false
         faraday.adapter Faraday.default_adapter
         faraday.request :json
         faraday.response :logger
@@ -37,7 +38,7 @@ class SessionsController < ApplicationController
         req.headers['Content-Type'] = 'application/json'
         req.body = { email: email, password: password }.to_json
       end
-  
+    
       if response.status == 200
         JSON.parse(response.body, symbolize_names: true)
       else
