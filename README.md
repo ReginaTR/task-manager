@@ -1,6 +1,6 @@
 # Task Manager
 
-Este é um projeto de gerenciamento de tarefas (**Task Manager**) que integra autenticação com outro serviço, utilizando Rails, Rails UI, MySQL, Faraday e JWT. O projeto é dividido em 4 serviços principais:
+    Este é um projeto de gerenciamento de tarefas (**Task Manager**) que integra autenticação com outro serviço, utilizando Rails, Rails UI, MySQL, Faraday e JWT. O projeto é dividido em 4 serviços principais:
 
 - **Serviço de Autenticação**: Responsável pela autenticação de usuários, usando JWT.
 - **Serviço de Gerenciamento de Tarefas**: Permite que os usuários criem, editem e excluam tarefas.
@@ -28,7 +28,7 @@ Este é um projeto de gerenciamento de tarefas (**Task Manager**) que integra au
 - **Node.js**: 18.20.5 ou superior
 - **Yarn**: 1.22.22 ou superior
     
-    ## 📦 Gems Utilizadas
+## 📦 Gems Utilizadas
 
 ```ruby
 gem "rails", "~> 7.2.2"
@@ -50,11 +50,11 @@ gem "ransack"
 gem "image_processing", "~> 1.2"
 gem "faraday"
 
-    
-Contribuição
+## 🤝 Contribuição
 
-Se você deseja contribuir com este projeto, faça um fork do repositório, crie uma branch com suas mudanças e envie um pull request.
+Se você deseja contribuir com este projeto, faça um **fork** do repositório, crie uma **branch** com suas mudanças e envie um **pull request**.
 
-Licença
+## 📝 Licença
 
-Este projeto está licenciado sob a MIT License - veja o arquivo LICENSE para mais detalhes.
+Este projeto está licenciado sob a **MIT License** - veja o arquivo [LICENSE](LICENSE) para mais detalhes.
+
