@@ -1,0 +1,34 @@
+<div class="max-w-3xl mx-auto px-4 my-16">
+  <div class="flex items-center justify-between pb-6 border-b dark:border-slate-700">
+    <h1 class="text-4xl font-extrabold text-slate-900 dark:text-slate-100 tracking-tight">Tarefas</h1>
+    <div class="flex items-center justify-end">
+      <%= link_to "Criar Tarefa", new_task_path, class: "btn btn-primary" %>
+    </div>
+  </div>
+
+  
+  <div class="my-6">
+    <%= search_form_for @q, url: tasks_path, method: :get, class: "space-y-4" do |f| %>
+      <div class="flex space-x-4">
+        <div class="w-full">
+          <%= f.label :status_eq, "Status", class: "block text-sm font-medium text-gray-700" %>
+          <%= f.select :status_eq, Task.statuses.keys.map { |status| [status.humanize, status] }, { prompt: "Selecione o status" }, class: "form-select mt-1 block w-full" %>
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-4">
+        <%= f.submit "Filtrar", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
+
+ 
+  <div id="tasks" class="divide-y dark:text-slate-700 mb-10">
+    <% @tasks.each do |task| %>
+      <div class="py-3">
+        <%= render task %> 
+        <%= link_to "Visualizar Tarefa", task, class: "btn-link inline-block my-3" %>
+      </div>
+    <% end %>
+  </div>
+</div>

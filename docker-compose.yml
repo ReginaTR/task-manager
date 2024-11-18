@@ -1,0 +1,178 @@
+version: "3.9"
+
+
+volumes:
+  web_db:
+  auth_db:
+  noti_db:
+  scrap_db:
+
+services:
+  # ===DATABASES===
+  web_db:
+    image: mysql:8.2
+    restart: always
+    environment:
+      TERM: xterm-256color
+    env_file:
+     - ./.env.development
+    ports:
+      - '3306:3306'
+    expose:
+      - '3306'
+    volumes:
+      - web_db:/var/lib/mysql
+    networks:
+      - app_network
+
+  auth_db:
+    image: mysql:8.2
+    restart: always
+    environment:
+      TERM: xterm-256color
+    env_file:
+     - ./.env.development
+    ports:
+      - '3307:3306'
+    expose:
+      - '3307'
+    volumes:
+      - auth_db:/var/lib/mysql
+    networks:
+      - app_network
+
+  noti_db:
+    image: mysql:8.2
+    restart: always
+    environment:
+      TERM: xterm-256color
+    env_file:
+     - ./.env.development
+    ports:
+      - '3308:3306'
+    expose:
+      - '3308'
+    volumes:
+      - noti_db:/var/lib/mysql
+    networks:
+      - app_network
+
+  scrap_db:
+    image: mysql:8.2
+    restart: always
+    environment:
+      TERM: xterm-256color
+    env_file:
+     - ./.env.development
+    ports:
+      - '3309:3306'
+    expose:
+      - '3309'
+    volumes:
+      - scrap_db:/var/lib/mysql
+    networks:
+      - app_network
+
+  # ===APPS===
+  web:
+    build: .
+    stdin_open: true
+    tty: true
+    entrypoint: web/config/setup_app.sh
+    command: bash -c "rails s -p 3000 -b '0.0.0.0'"
+    environment:
+      TZ: America/Fortaleza
+      TERM: xterm-256color
+    depends_on:
+     - web_db
+    links:
+     - web_db
+     - auth
+     - scrap
+     - noti
+    env_file:
+     - ./.env.development
+    volumes:
+     - .:/home/apps
+    ports:
+     - '3000:3000'
+    expose:
+     - '3000'
+    networks:
+      - app_network
+
+  auth:
+    build: .
+    stdin_open: true
+    tty: true
+    entrypoint: auth/config/setup_app.sh
+    command: bash -c "rails s -p 3001 -b '0.0.0.0'"
+    environment:
+      TZ: America/Fortaleza
+      TERM: xterm-256color
+    depends_on:
+     - auth_db
+    links:
+     - auth_db
+    env_file:
+     - ./.env.development
+    volumes:
+     - .:/home/apps
+    ports:
+     - '3001:3001'
+    expose:
+     - '3001'
+    networks:
+      - app_network
+
+  noti:
+    build: .
+    stdin_open: true
+    tty: true
+    entrypoint: noti/config/setup_app.sh
+    command: bash -c "rails s -p 3002 -b '0.0.0.0'"
+    environment:
+      TZ: America/Fortaleza
+      TERM: xterm-256color
+    depends_on:
+     - noti_db
+    links:
+     - noti_db
+    env_file:
+     - ./.env.development
+    volumes:
+     - .:/home/apps
+    ports:
+     - '3002:3002'
+    expose:
+     - '3002'
+    networks:
+      - app_network
+
+  scrap:
+    build: .
+    stdin_open: true
+    tty: true
+    entrypoint: scrap/config/setup_app.sh
+    command: bash -c "rails s -p 3003 -b '0.0.0.0'"
+    environment:
+      TZ: America/Fortaleza
+      TERM: xterm-256color
+    depends_on:
+     - scrap_db
+    links:
+     - scrap_db
+    env_file:
+     - ./.env.development
+    volumes:
+     - .:/home/apps
+    ports:
+     - '3003:3003'
+    expose:
+     - '3003'
+    networks:
+      - app_network
+
+networks:
+  app_network:
+    driver: bridge
